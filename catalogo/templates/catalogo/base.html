@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Biblioteca - Carlos Sánchez Damas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'catalogo/css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Biblioteca - Carlos Sánchez Damas</h1>
+        <nav>
+            <a href="{% url 'lista_libros' %}">Catálogo</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+</body>
+</html>
