@@ -2,4 +2,11 @@ from django.db import models
 
 # Create your models here.
 class Libro(models.Model):
-    titulo 
+    titulo = models.CharField(max_length=150)
+    autor = models.CharField(max_length=100)
+    genero = models.CharField(max_length=50)
+    anio_publicacion = models.IntegerField()
+    disponible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.titulo
