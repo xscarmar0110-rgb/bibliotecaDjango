@@ -10,6 +10,8 @@ class Autor(models.Model):
 
     class Meta:
         ordering = ['apellidos', 'nombre']
+        verbose_name = "Autor"
+        verbose_name_plural = "Autores"
 
     def __str__(self):
         return f"{self.nombre} {self.apellidos}"
@@ -20,6 +22,11 @@ class Editorial(models.Model):
     email = models.EmailField(blank=True)
     sitio_web = models.URLField(blank=True)
     activa = models.BooleanField(default=True)
+
+    class Meta:
+            ordering = ['nombre']
+            verbose_name = "Editorial"
+            verbose_name_plural = "Editoriales"
 
     def __str__(self):
         return self.nombre
