@@ -38,6 +38,11 @@ class Libro(models.Model):
         INTERMEDIA = 2, "Intermedia"
         AVANZADA = 3, "Avanzada"
 
+    class Meta:
+            ordering = ['titulo']
+            verbose_name = "Libro"
+            verbose_name_plural = "Libros"
+
     titulo = models.CharField(max_length=200)
     isbn = models.CharField(max_length=13, unique=True)
     sinopsis = models.TextField(blank=True)
@@ -45,13 +50,8 @@ class Libro(models.Model):
     paginas = models.PositiveIntegerField()
     precio = models.DecimalField(max_digits=8, decimal_places=2)
     disponible = models.BooleanField(default=True)
-
     genero = models.CharField(max_length=3, choices=Genero.choices, default=Genero.NOVELA)
-
     dificultad = models.PositiveSmallIntegerField(choices=Dificultad.choices, default=Dificultad.BASICA)
-
-    class Meta:
-        ordering = ['titulo']
 
     def __str__(self):
         return self.titulo
