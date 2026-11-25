@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from catalogo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.principal, name='principal'),
+    path('editorial/<int:pk>/', views.editorial, name='editorial'),
+    path('libro/<int:pk>/', views.libro, name='libro'),
+    path('autor/<int:pk>/', views.autor, name='autor'),
+    path('prestamo/<int:pk_libro>/<int:pk_usuario>/', views.autor, name='autor'),
+
 ]

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Total de libros: {{ estadisticas.total_libros }}</p>
+    <p>Precio medio: {{ estadisticas.precio_medio|floatformat:2 }} €</p>
+    <p>Más caro: {{ estadisticas.mas_caro }} €</p>
+
+    {% for libro in libros %}
+        <p>{{ libro.titulo }}</p>
+    {% endfor %}
+
+    {% for grupo in por_genero %}
+    <p>{{ grupo.genero }}: {{ grupo.cantidad }} libros, media {{ grupo.precio_medio|floatformat:2 }} €</p>
+    {% endfor %}
+</body>
+</html>
