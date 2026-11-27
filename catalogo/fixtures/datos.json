@@ -1,0 +1,104 @@
+[
+{
+  "model": "catalogo.autor",
+  "pk": 1,
+  "fields": {
+    "nombre": "Carloss",
+    "apellidos": "Sánchez Damas",
+    "fecha_nacimiento": "2006-07-26",
+    "nacionalidad": "España",
+    "biografia": "Alumno de 2º de DAW."
+  }
+},
+{
+  "model": "catalogo.autor",
+  "pk": 2,
+  "fields": {
+    "nombre": "José",
+    "apellidos": "Ignacio Huertas",
+    "fecha_nacimiento": "2026-11-12",
+    "nacionalidad": "España",
+    "biografia": "Profesor de Servidores en 2º DAW"
+  }
+},
+{
+  "model": "catalogo.editorial",
+  "pk": 1,
+  "fields": {
+    "nombre": "Dirusette",
+    "email": "dirusetterelos@gmail.com",
+    "sitio_web": "https://www.dirusette.com",
+    "activa": true
+  }
+},
+{
+  "model": "catalogo.editorial",
+  "pk": 2,
+  "fields": {
+    "nombre": "JI",
+    "email": "jihuertas@gmail.com",
+    "sitio_web": "https://www.jihuertas.com",
+    "activa": false
+  }
+},
+{
+  "model": "catalogo.libro",
+  "pk": 1,
+  "fields": {
+    "titulo": "Java",
+    "isbn": "1",
+    "sinopsis": "Introducción a Java.",
+    "fecha_publicacion": "2026-11-12",
+    "paginas": 10,
+    "precio": "50.00",
+    "disponible": true,
+    "genero": "ENS",
+    "dificultad": 1,
+    "editorial": 1,
+    "autores": [
+      2,
+      1
+    ]
+  }
+},
+{
+  "model": "catalogo.libro",
+  "pk": 2,
+  "fields": {
+    "titulo": "Python",
+    "isbn": "2",
+    "sinopsis": "Introducción a Python.",
+    "fecha_publicacion": "2026-11-12",
+    "paginas": 20,
+    "precio": "70.00",
+    "disponible": true,
+    "genero": "ENS",
+    "dificultad": 3,
+    "editorial": 1,
+    "autores": [
+      2,
+      1
+    ]
+  }
+},
+{
+  "model": "catalogo.libro",
+  "pk": 3,
+  "fields": {
+    "titulo": "Samu",
+    "isbn": "2222",
+    "sinopsis": "asdadasd",
+    "fecha_publicacion": "2026-11-18",
+    "paginas": 30,
+    "precio": "5.00",
+    "disponible": true,
+    "genero": "NOV",
+    "dificultad": 1,
+    "editorial": 1,
+    "autores": [
+      2,
+      1
+    ]
+  }
+}
+]
