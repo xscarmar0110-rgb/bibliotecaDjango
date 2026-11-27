@@ -6,3 +6,17 @@ Samuel Carbonell
     El gunicorn y el whitenoise
 
 2.- Ahora en el config/settings.py añadimos un import 
+    Tambien cambiamos una linea y añadimos otra 
+
+3.- A continuación lo que haremos sera subir todo a github para 
+    poder utilizarlo con el render
+
+4.- Ahora ya configuramos desde render(la web)
+
+    Le damos a NEW arriba a la derecha, y le damos a web service
+
+    Seleccionamos nuestro proyecto ponemos los parametros necesarios
+
+5.- Y ya podremos acceder a nuestra web
+
+https://bibliotecadjango-rles.onrender.com

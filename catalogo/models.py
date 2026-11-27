@@ -98,15 +98,26 @@ class Participacion(models.Model):
 
 
 class Prestamo(models.Model):
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["libro"],
+                condition=Q(fecha_devolucion__isnull=True),
+                name="un_prestamo_activo_por_libro",
+            )
+        ]
+
     libro = models.ForeignKey(
         "Libro", on_delete=models.PROTECT,
         related_name="prestamos"
     )
+
     usuario = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="prestamos_biblioteca"
     )
+    
     fecha_prestamo = models.DateTimeField(auto_now_add=True)
     fecha_devolucion = models.DateTimeField(null=True, blank=True)
 
@@ -115,3 +126,13 @@ class Prestamo(models.Model):
 # Practica, hosting gratuito para subir mi codigo 
 
 # El codigo de biblioteca a github y subir todos los cambios al hosting gratuito
+
+# Lo des settings me lo ha recomendado la ia como una buena practica
+
+class Perfil(models.Model):
+    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="perfil")
+    telefono = models.CharField(max_length=20, blank=True)
+    direccion = models.CharField(max_length=200, blank=True)
+
+    def __str__(self):
+        return f"Perfil de {self.usuario}"

@@ -83,30 +83,3 @@ def autor(request, pk):
 # El select related sirve para cuando solo me tengo que traer un dato de la consulta
 
 # EL related_name le ponemos el nombre de la clase en plural
-
-
-def prestar_libro(request, libro_id, usuario):
-    with transaction.atomic():
-        libro = Libro.objects.select_for_update().get(pk=libro_id)
-        if not libro.disponible:
-            raise ValueError("El libro no esta disponible")
-
-        prestamo = Prestamo.objects.create(
-            libro = libro,
-            usuario = usuario,
-        )
-        libro.disponible = False
-        libro.save(update_fields=["disponible"])
-        return prestamo
-
-    
-def devolver_libro(request, prestamo_id):
-    with transaction.atomic():
-        prestamo = Prestamo.objects.select_for_update().get(pk=prestamo_id)
-        if prestamo.fecha_devolucion is not None:
-            raise ValueError("El préstamo ya fue devuelto")
-
-        prestamo.fecha_devolucion = timezone.now()
-        prestamo.save(update_fields=["fecha_devolucion"])
-        prestamo.libro.disponible = True
-        prestamo.libro.save(update_fields=["disponible"])

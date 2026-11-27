@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Autor, Libro, Editorial
+from .models import Autor, Libro, Editorial, Prestamo, Perfil
 
 # Register your models here.
 admin.site.register(Autor)
 admin.site.register(Editorial)
+admin.site.register(Perfil)
 
 @admin.register(Libro)
 class LibroAdmin(admin.ModelAdmin):
@@ -12,3 +13,9 @@ class LibroAdmin(admin.ModelAdmin):
     search_fields = ("titulo", "isbn", "autores__nombre")
     ordering = ("titulo",)
     list_per_page = 20
+
+@admin.register(Prestamo)
+class PrestamoAdmin(admin.ModelAdmin):
+    list_display = ("libro", "usuario", "fecha_prestamo", "fecha_devolucion")
+    list_filter = ("fecha_devolucion",)
+    ordering = ("-fecha_prestamo",)
