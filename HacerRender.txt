@@ -1,0 +1,8 @@
+Este es el documento que voy a utilizar para decir los pasos que he seguido para hacer lo de render 
+
+Samuel Carbonell
+
+1.- Lo primero que hay que hacer es añadir al requirements.py dos paquetes
+    El gunicorn y el whitenoise
+
+2.- Ahora en el config/settings.py añadimos un import 
