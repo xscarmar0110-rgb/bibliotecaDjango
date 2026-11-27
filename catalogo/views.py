@@ -35,21 +35,11 @@ def principal(request):
     )
     print(por_genero)
 
-    # values() devuelve el código del género ("NOV"), así que le añadimos
-    # el nombre legible ("Novela") para mostrarlo en la plantilla
-    por_genero = [
-        {**grupo, "nombre": Libro.Genero(grupo["genero"]).label}
-        for grupo in por_genero
-    ]
-
     # Por ultimo tenemos que meterlo en el return para tenerlo en la pagina
     return render(request, 'catalogo/principal.html', {
     'libros': consulta,
     'estadisticas': estadisticas,
     'por_genero': por_genero,
-    'todos_libros': Libro.objects.select_related("editorial"),
-    'autores': Autor.objects.all(),
-    'editoriales': Editorial.objects.all(),
     })
 
 #aggregate() hace un cálculo sobre todo el conjunto 

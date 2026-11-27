@@ -1,72 +1,21 @@
-{% extends 'base.html' %}
-
-{% block titulo %}Inicio{% endblock %}
-
-{% block contenido %}
-    <h1>Biblioteca</h1>
-
-    <h2>Estadísticas</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
     <p>Total de libros: {{ estadisticas.total_libros }}</p>
-    <p>Total de páginas: {{ estadisticas.total_paginas|default:0 }}</p>
-    <p>Precio medio: {{ estadisticas.precio_medio|default:0|floatformat:2 }} €</p>
-    <p>Más caro: {{ estadisticas.mas_caro|default:0 }} €</p>
+    <p>Precio medio: {{ estadisticas.precio_medio|floatformat:2 }} €</p>
+    <p>Más caro: {{ estadisticas.mas_caro }} €</p>
 
-    <h2>Todos los libros</h2>
-    {% if todos_libros %}
-        <table>
-            <tr><th>Título</th><th>Editorial</th><th>Precio</th><th>Páginas</th></tr>
-            {% for libro in todos_libros %}
-            <tr>
-                <td><a href="{% url 'libro' libro.pk %}">{{ libro.titulo }}</a></td>
-                <td>
-                    {% if libro.editorial %}
-                        <a href="{% url 'editorial' libro.editorial.pk %}">{{ libro.editorial.nombre }}</a>
-                    {% else %}
-                        <span class="vacio">Sin editorial</span>
-                    {% endif %}
-                </td>
-                <td>{{ libro.precio }} €</td>
-                <td>{{ libro.paginas }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p class="vacio">Todavía no hay libros.</p>
-    {% endif %}
+    {% for libro in libros %}
+        <p>{{ libro.titulo }}</p>
+    {% endfor %}
 
-    <h2>Libros baratos (menos de 10 €) o cortos (menos de 150 páginas)</h2>
-    <ul>
-        {% for libro in libros %}
-            <li><a href="{% url 'libro' libro.pk %}">{{ libro.titulo }}</a></li>
-        {% empty %}
-            <li class="vacio">Ninguno.</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Por género</h2>
-    <ul>
-        {% for grupo in por_genero %}
-            <li>{{ grupo.nombre }}: {{ grupo.cantidad }} libro{{ grupo.cantidad|pluralize }}, media {{ grupo.precio_medio|floatformat:2 }} €</li>
-        {% empty %}
-            <li class="vacio">Sin datos.</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Autores</h2>
-    <ul>
-        {% for autor in autores %}
-            <li><a href="{% url 'autor' autor.pk %}">{{ autor }}</a></li>
-        {% empty %}
-            <li class="vacio">Todavía no hay autores.</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Editoriales</h2>
-    <ul>
-        {% for editorial in editoriales %}
-            <li><a href="{% url 'editorial' editorial.pk %}">{{ editorial.nombre }}</a></li>
-        {% empty %}
-            <li class="vacio">Todavía no hay editoriales.</li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+    {% for grupo in por_genero %}
+    <p>{{ grupo.genero }}: {{ grupo.cantidad }} libros, media {{ grupo.precio_medio|floatformat:2 }} €</p>
+    {% endfor %}
+</body>
+</html>

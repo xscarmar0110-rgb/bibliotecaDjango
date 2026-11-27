@@ -1,25 +1,21 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{autor}}</h1>
 
-{% block titulo %}{{ autor }}{% endblock %}
-
-{% block contenido %}
-    <h1>{{ autor }}</h1>
-
-    <p class="dato">
-        {{ autor.nacionalidad }}
-        {% if autor.fecha_nacimiento %} · Nacido el {{ autor.fecha_nacimiento|date:"j \d\e F \d\e Y" }}{% endif %}
-    </p>
-
-    {% if autor.biografia %}
-        <p>{{ autor.biografia|linebreaksbr }}</p>
-    {% endif %}
-
-    <h2>Libros</h2>
+    <h2>Libros: </h2>
     <ul>
         {% for libro in autor.libros.all %}
-            <li><a href="{% url 'libro' libro.pk %}">{{ libro.titulo }}</a></li>
-        {% empty %}
-            <li class="vacio">Sin libros.</li>
+        <li>
+            {{libro.titulo}}
+        </li>
         {% endfor %}
     </ul>
-{% endblock %}
+
+</body>
+</html>

@@ -1,19 +1,24 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{editorial.nombre}}</h1>
 
-{% block titulo %}{{ editorial.nombre }}{% endblock %}
-
-{% block contenido %}
-    <h1>{{ editorial.nombre }}</h1>
-
-    {% if editorial.email %}<p class="dato">Email: {{ editorial.email }}</p>{% endif %}
-    {% if editorial.sitio_web %}<p class="dato">Web: <a href="{{ editorial.sitio_web }}">{{ editorial.sitio_web }}</a></p>{% endif %}
-
-    <h2>Libros disponibles</h2>
+    <h2>Libros: </h2>
     <ul>
         {% for libro in editorial.libros_disponibles %}
-            <li><a href="{% url 'libro' libro.pk %}">{{ libro.titulo }}</a> ({{ libro.precio }} €)</li>
-        {% empty %}
-            <li class="vacio">No hay libros disponibles.</li>
+        <li>
+            {{libro.titulo}}
+            <ul>
+                
+            </ul>
+        </li>
         {% endfor %}
     </ul>
-{% endblock %}
+
+</body>
+</html>
