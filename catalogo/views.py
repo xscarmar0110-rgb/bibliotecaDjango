@@ -35,11 +35,21 @@ def principal(request):
     )
     print(por_genero)
 
+    # values() devuelve el código del género ("NOV"), así que le añadimos
+    # el nombre legible ("Novela") para mostrarlo en la plantilla
+    por_genero = [
+        {**grupo, "nombre": Libro.Genero(grupo["genero"]).label}
+        for grupo in por_genero
+    ]
+
     # Por ultimo tenemos que meterlo en el return para tenerlo en la pagina
     return render(request, 'catalogo/principal.html', {
     'libros': consulta,
     'estadisticas': estadisticas,
     'por_genero': por_genero,
+    'todos_libros': Libro.objects.select_related("editorial"),
+    'autores': Autor.objects.all(),
+    'editoriales': Editorial.objects.all(),
     })
 
 #aggregate() hace un cálculo sobre todo el conjunto 
@@ -48,22 +58,28 @@ def principal(request):
 
 
 def editorial(request, pk):
-    editorial = Editorial.objects
+    # Buscamos la editorial del pk de la URL y, con el Prefetch, le añadimos
+    # la lista "libros_disponibles" que recorre la plantilla
+    editorial = get_object_or_404(
+        Editorial.objects.prefetch_related(
+            Prefetch(
+                "libros",
+                queryset=Libro.objects.filter(disponible=True).order_by("titulo"),
+                to_attr="libros_disponibles",
+            )
+        ),
+        pk=pk,
+    )
 
-    editoriales = Editorial.objects.prefetch_related(
-    Prefetch(
-        "libros",
-        queryset=Libro.objects.filter(disponible=True).order_by("titulo"),
-        to_attr="libros_disponibles",
-    )
-    )
-    
     return render(request, 'catalogo/editorial.html', {'editorial': editorial})
 
 def libro(request, pk):
-    libro = Libro.objects.filter(precio__lte = 10)
-    if (libro):
-        libro = libro.select_related("editorial").prefetch_related("autores").get(pk = pk)
+    # select_related para la editorial (una) y prefetch_related para los autores (varios).
+    # get_object_or_404 da un 404 si el libro no existe, en vez de un error 500
+    libro = get_object_or_404(
+        Libro.objects.select_related("editorial").prefetch_related("autores"),
+        pk=pk,
+    )
 
     return render(request, 'catalogo/libro.html', {'libro': libro})
 

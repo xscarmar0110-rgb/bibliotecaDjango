@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Biblioteca{% endblock %} · Biblioteca</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 1rem 1.5rem; color: #222; line-height: 1.5; }
+        nav { display: flex; gap: 1rem; padding-bottom: .75rem; margin-bottom: 1.5rem; border-bottom: 1px solid #ddd; }
+        nav a { font-weight: 600; }
+        a { color: #1a5fb4; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .dato { color: #555; }
+        .vacio { color: #888; font-style: italic; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'principal' %}">Inicio</a>
+        <a href="{% url 'admin:index' %}">Administración</a>
+    </nav>
+
+    {% block contenido %}{% endblock %}
+</body>
+</html>
